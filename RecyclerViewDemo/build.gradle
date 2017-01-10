@@ -29,8 +29,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile rootProject.ext.dependencies["appcompat-v7"]
     compile rootProject.ext.dependencies["recyclerview"]
-
-
-
-    compile project(':ptr-lib')
+    compile project(':RefreshLibrary')
 }

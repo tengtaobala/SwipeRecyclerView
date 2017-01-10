@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'//添加
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'//加载属性文件
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['resources']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            // aidl.srcDirs = ['src']
+            // renderscript.srcDirs = ['src']
+        }
+
+        androidTest.setRoot('tests')
+    }
+}
+
+dependencies {
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["recyclerview"]
+
+//    compile "com.android.support:recyclerview-v7:25.0.1"
+//    compile "com.android.support:appcompat-v7::25.0.1"
+}
+//apply from: './gradle-mvn-push.gradle'
+
+ext {
+    bintrayRepo = 'RefreshRecyclerView'
+    bintrayName = 'recyclerview'
+
+    publishedGroupId = 'com.tengtao.refresh'
+    libraryName = 'RefreshLibrary'
+    artifact = 'recyclerview'
+
+    libraryDescription = '刷新加载更多'
+
+    siteUrl = 'https://github.com/tengtaobala/SwipeRecyclerView'
+    gitUrl = 'https://github.com/tengtaobala/SwipeRecyclerView.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'tengtaobala'
+    developerName = 'tengtaobala'
+    developerEmail = '565926039@qq.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+
