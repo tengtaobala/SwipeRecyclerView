@@ -1,4 +1,4 @@
-package com.why.recyclerviewdemo.new1;
+package in.srain.cube.views.ptr.swipe;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,18 +16,16 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
-import com.why.recyclerviewdemo.OnRefreshListener;
-import com.why.recyclerviewdemo.R;
-
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.R;
 
 /**
  * Created by tengtao on 2017/1/9.
  */
 
-public class SwipeRecyclerView extends XRecyclerView {
+public class SwipeRecyclerView extends FrameLayout {
     private Context mContext;
     private LayoutInflater mInflater;
 
@@ -228,16 +226,66 @@ public class SwipeRecyclerView extends XRecyclerView {
 
     }
 
-    @Override
     public void setAdapter(RecyclerView.Adapter adapter) {
         if (mRegisterCheckEmptyView) {
             unregisterAdapterDataObserver();
         }
         this.mAdapter = adapter;
-        super.setAdapter(adapter);
 
+        mRecyclerView.setAdapter(adapter);
         registerAdapterDataObserver();
     }
+
+    /**
+     * LinearLayoutManager
+     */
+    public void setLinearManager() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+    }
+
+    /**
+     * GridLayoutManager
+     */
+
+    public void setGridManager(int spanCount) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, spanCount);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+    }
+
+
+    /**
+     * StaggeredGridLayoutManager
+     */
+
+    public void setStaggeredManager(int spanCount) {
+        StaggeredGridLayoutManager staggeredGridLayoutManager =
+                new StaggeredGridLayoutManager(spanCount, LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(staggeredGridLayoutManager);
+    }
+
+
+    public void setLayoutManager(RecyclerView.LayoutManager layout) {
+        mRecyclerView.setLayoutManager(layout);
+    }
+
+
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return mRecyclerView.getLayoutManager();
+    }
+
+
+    public void addItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
+        mRecyclerView.addItemDecoration(itemDecoration);
+    }
+
+
+    public void setItemAnimator(RecyclerView.ItemAnimator animator) {
+        mRecyclerView.setItemAnimator(animator);
+    }
+
 
     private RecyclerView.OnScrollListener mOnScrollListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -314,10 +362,6 @@ public class SwipeRecyclerView extends XRecyclerView {
         }
     }
 
-    @Override
-    protected RecyclerView getRecyclerView() {
-        return mRecyclerView;
-    }
 
 
     private void checkIfEmptyView() {

@@ -1,4 +1,4 @@
-package com.why.recyclerviewdemo.new1;
+package com.why.recyclerviewdemo;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;

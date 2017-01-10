@@ -7,11 +7,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.view.View;
 import android.widget.Toast;
 
-import com.why.recyclerviewdemo.new1.PtrClassicHeader;
-import com.why.recyclerviewdemo.new1.SwipeRecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import in.srain.cube.views.ptr.swipe.OnRefreshListener;
+import in.srain.cube.views.ptr.swipe.SwipeRecyclerView;
+
 
 public class SwipeActivity extends AppCompatActivity {
 
