@@ -33,6 +33,7 @@ public class SwipeActivity extends AppCompatActivity {
         mSwipeRecyclerView.addFooterView(R.layout.footer_layout_default);
         mSwipeRecyclerView.setEmptyView(R.layout.layout_empty);
         mSwipeRecyclerView.setHeaderView(new PtrClassicHeader(this));
+        mSwipeRecyclerView.setRefreshWhenEmpty(true);
         initDatas();
         mSwipeRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -48,7 +49,7 @@ public class SwipeActivity extends AppCompatActivity {
                         mSwipeRecyclerView.refreshCompleted();
 
                     }
-                },2000);
+                }, 2000);
             }
 
             @Override
@@ -83,7 +84,7 @@ public class SwipeActivity extends AppCompatActivity {
             public void run() {
                 mSwipeRecyclerView.autoRefresh(true);
             }
-        },500);
+        }, 500);
     }
 
     public void clearClick(View view) {

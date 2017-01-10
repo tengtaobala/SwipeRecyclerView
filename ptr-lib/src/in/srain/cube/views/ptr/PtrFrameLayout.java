@@ -657,15 +657,6 @@ public class PtrFrameLayout extends ViewGroup {
      * @param ignoreHook
      */
     private void notifyUIRefreshComplete(boolean ignoreHook) {
-
-        Log.e("debug","2222");
-
-
-        Log.e("debug","hasLeftStartPosition="+mPtrIndicator.hasLeftStartPosition());
-        Log.e("debug","ignoreHook="+ignoreHook);
-        Log.e("debug","mRefreshCompleteHook=="+mRefreshCompleteHook);
-
-
         /**
          * After hook operation is done, {@link #notifyUIRefreshComplete} will be call in resume action to ignore hook.
          */

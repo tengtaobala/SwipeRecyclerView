@@ -46,8 +46,10 @@ public class SwipeRecyclerView extends FrameLayout {
     private boolean isPushRefreshEnable = true;
     //是否启用加载更多
     private boolean isPullMoreEnable = true;
+    private boolean isRefreshWhenEmpty = false;
     private View mEmptyView;
     private boolean mRegisterCheckEmptyView;
+
     private RecyclerView.Adapter mAdapter;
 
 
@@ -146,6 +148,7 @@ public class SwipeRecyclerView extends FrameLayout {
         isPushRefreshEnable = pushRefreshEnable;
     }
 
+
     public void setPullMoreEnable(boolean pullMoreEnable) {
         isPullMoreEnable = pullMoreEnable;
     }
@@ -182,6 +185,10 @@ public class SwipeRecyclerView extends FrameLayout {
 
     public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
         mOnRefreshListener = onRefreshListener;
+    }
+
+    public void setRefreshWhenEmpty(boolean refreshWhenEmpty) {
+        isRefreshWhenEmpty = refreshWhenEmpty;
     }
 
     public boolean isHasMore() {
@@ -363,7 +370,6 @@ public class SwipeRecyclerView extends FrameLayout {
     }
 
 
-
     private void checkIfEmptyView() {
         if (mEmptyView != null && mAdapter != null) {
             if (mAdapter.getItemCount() == 0) {
@@ -409,7 +415,10 @@ public class SwipeRecyclerView extends FrameLayout {
         mPtrFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return checkRecyclerScroll() && isPushRefreshEnable;
+                if (mEmptyViewContainer.getVisibility() == VISIBLE) {
+                    return checkCanRefreshWhenEmptyView();
+                }
+                return (checkRecyclerScroll() && isPushRefreshEnable);
             }
 
             @Override
@@ -419,5 +428,9 @@ public class SwipeRecyclerView extends FrameLayout {
                 }
             }
         });
+    }
+
+    private boolean checkCanRefreshWhenEmptyView() {
+        return isPushRefreshEnable && isRefreshWhenEmpty && mEmptyView != null;
     }
 }
